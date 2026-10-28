@@ -1,0 +1,41 @@
+:root {
+	--color-background: #f4f5fb;
+	--color-surface: #ffffff;
+	--color-primary: #3b3fd8;
+	--color-secondary: #e3e4fb;
+	--color-tertiary: #ff7a3d;
+	--color-text: #111827;
+	--color-text-muted: #4b5563;
+
+	--font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+	--font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+	--page-gutter: clamp(1rem, 5vw, 4rem);
+	--content-max-width: 72rem;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background-color: var(--color-background);
+	color: var(--color-text);
+	font-family: var(--font-body);
+	font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+	line-height: 1.6;
+}
+
+button,
+a,
+[role='button'] {
+	-webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+	outline: 3px solid var(--color-primary);
+	outline-offset: 3px;
+}
