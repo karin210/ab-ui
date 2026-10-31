@@ -3,7 +3,9 @@ import {
 	emailParts,
 	signInPasswordGuidance,
 	signUpPasswordGuidance,
-	type EmailPart
+	signUpPasswordRules,
+	type EmailPart,
+	type PasswordRule
 } from '#lib/validation/auth.ts';
 
 export type AuthField = 'email' | 'password';
@@ -26,8 +28,18 @@ export abstract class AuthForm {
 
 	protected abstract passwordRules(value: string): string[];
 
+	/** Sign-up lists every password rule up front; other forms have no checklist. */
+	protected passwordChecklist(value: string): PasswordRule[] {
+		void value;
+		return [];
+	}
+
 	get emailParts(): EmailPart[] {
 		return emailParts(this.email);
+	}
+
+	get passwordRuleList(): PasswordRule[] {
+		return this.passwordChecklist(this.password);
 	}
 
 	get firstInvalidField(): AuthField | null {
@@ -98,5 +110,9 @@ export class SignInForm extends AuthForm {
 export class SignUpForm extends AuthForm {
 	protected passwordRules(value: string): string[] {
 		return signUpPasswordGuidance(value);
+	}
+
+	protected passwordChecklist(value: string): PasswordRule[] {
+		return signUpPasswordRules(value);
 	}
 }

@@ -89,21 +89,31 @@ export function isSignUpPasswordValid(value: string): boolean {
 	return SIGN_UP_PASSWORD_PATTERN.test(value);
 }
 
-/** Returns only the sign-up password requirements that the current value does not meet yet. */
+export interface PasswordRule {
+	/** Short requirement shown after "Usa al menos:", always visible whether or not it is met. */
+	text: string;
+	met: boolean;
+}
+
+/** Every sign-up password rule, in display order, flagging which ones the value meets. */
+export function signUpPasswordRules(value: string): PasswordRule[] {
+	return [
+		{
+			text: `${MIN_PASSWORD_LENGTH} caracteres`,
+			met:
+				value.length >= MIN_PASSWORD_LENGTH &&
+				value.length <= MAX_PASSWORD_LENGTH &&
+				!/\s/.test(value)
+		},
+		{ text: '1 letra minúscula', met: /[a-z]/.test(value) },
+		{ text: '1 letra mayúscula', met: /[A-Z]/.test(value) },
+		{ text: '1 número', met: /\d/.test(value) }
+	];
+}
+
+/** Returns the sign-up password rules that the current value does not meet yet. */
 export function signUpPasswordGuidance(value: string): string[] {
-	if (!value) return ['Escribe una contraseña.'];
-
-	const guidance: string[] = [];
-	if (/\s/.test(value)) guidance.push('Quita los espacios.');
-	if (value.length < MIN_PASSWORD_LENGTH) {
-		guidance.push(`Usa al menos ${MIN_PASSWORD_LENGTH} caracteres.`);
-	}
-	if (value.length > MAX_PASSWORD_LENGTH) {
-		guidance.push(`Usa como máximo ${MAX_PASSWORD_LENGTH} caracteres.`);
-	}
-	if (!/[a-z]/.test(value)) guidance.push('Agrega una letra minúscula.');
-	if (!/[A-Z]/.test(value)) guidance.push('Agrega una letra mayúscula.');
-	if (!/\d/.test(value)) guidance.push('Agrega un número.');
-
-	return guidance;
+	return signUpPasswordRules(value)
+		.filter((rule) => !rule.met)
+		.map((rule) => rule.text);
 }

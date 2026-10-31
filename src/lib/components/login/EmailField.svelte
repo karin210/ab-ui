@@ -31,7 +31,7 @@
 		onblur={() => form.leave('email')}
 		data-mark={form.mark('email')}
 		aria-invalid={form.guidance('email') ? 'true' : undefined}
-		aria-describedby="{uid}-example {uid}-guidance"
+		aria-describedby="{uid}-example"
 	/>
 	<p id="{uid}-example" class="auth-example">
 		Ejemplo:
@@ -42,8 +42,5 @@
 					{part.met ? '(listo)' : '(falta)'}</span
 				>{/if}
 		{/each}
-	</p>
-	<p id="{uid}-guidance" class="auth-guidance" aria-live="polite" hidden={!form.guidance('email')}>
-		{form.guidance('email')}
 	</p>
 </div>

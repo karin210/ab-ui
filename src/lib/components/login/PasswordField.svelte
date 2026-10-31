@@ -109,14 +109,29 @@
 		</div>
 	</div>
 	<span class="visually-hidden" role="status">{copyMessage}</span>
-	<p
-		id="{uid}-guidance"
-		class="auth-guidance"
-		aria-live="polite"
-		hidden={!form.guidance('password')}
-	>
-		{form.guidance('password')}
-	</p>
+	{#if form.passwordRuleList.length > 0}
+		<p id="{uid}-guidance" class="auth-example">
+			Usa al menos:
+			{#each form.passwordRuleList as rule, index (rule.text)}
+				{#if index > 0},{/if}
+				<span
+					class:met={form.isEdited('password') && rule.met}
+					class:missing={form.isEdited('password') && !rule.met}>{rule.text}</span
+				>{#if form.isEdited('password')}<span class="visually-hidden">
+						{rule.met ? '(listo)' : '(falta)'}</span
+					>{/if}
+			{/each}
+		</p>
+	{:else}
+		<p
+			id="{uid}-guidance"
+			class="auth-guidance"
+			aria-live="polite"
+			hidden={!form.guidance('password')}
+		>
+			{form.guidance('password')}
+		</p>
+	{/if}
 </div>
 
 <style>
