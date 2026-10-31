@@ -1,4 +1,5 @@
 <script lang="ts">
+	import UrlBar from '#lib/components/UrlBar.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -24,6 +25,7 @@
 				<h2 id="pattern-{pattern.id}" class="pattern-title">{pattern.name}</h2>
 				<p class="pattern-text">{pattern.description}</p>
 				<div class="pattern-demo">
+					<UrlBar />
 					<Pattern />
 				</div>
 			</section>
@@ -89,6 +91,9 @@
 	}
 
 	.pattern-demo {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(1rem, 3vw, 1.5rem);
 		padding: clamp(1.25rem, 3vw, 2rem);
 		border-radius: 1rem;
 		background: var(--color-surface);

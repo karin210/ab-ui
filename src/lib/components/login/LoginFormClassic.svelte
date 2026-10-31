@@ -10,6 +10,8 @@
 	let submitting = $state(false);
 	let signedIn = $state(false);
 
+	const revealLabel = $derived(showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña');
+
 	// Standard convention: submit stays disabled until both fields have content.
 	const canSubmit = $derived(email.trim() !== '' && password !== '' && !submitting);
 
@@ -58,9 +60,20 @@
 				type="button"
 				class="toggle"
 				aria-pressed={showPassword}
+				aria-label={revealLabel}
+				title={revealLabel}
 				onclick={() => (showPassword = !showPassword)}
 			>
-				{showPassword ? 'Ocultar' : 'Mostrar'}
+				<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+					{#if showPassword}
+						<path
+							d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a19.8 19.8 0 0 1 5.06-5.94M9.9 4.24A10.9 10.9 0 0 1 12 5c7 0 11 7 11 7a19.7 19.7 0 0 1-3.17 4.19M1 1l22 22"
+						/>
+					{:else}
+						<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" />
+						<circle cx="12" cy="12" r="3" />
+					{/if}
+				</svg>
 			</button>
 		</div>
 	</div>
@@ -81,6 +94,8 @@
 		{#if signedIn}Sesión iniciada (simulado).{/if}
 	</p>
 </form>
+
+<p class="signup">¿No tienes cuenta? <a href="/">Crear una cuenta</a></p>
 </section>
 
 <style>
@@ -139,13 +154,27 @@
 	}
 
 	.toggle {
+		display: grid;
+		place-items: center;
 		padding-inline: 0.875rem;
 		border: 0;
 		background: transparent;
-		color: var(--color-primary);
-		font: inherit;
-		font-weight: 600;
+		color: var(--color-text-muted);
 		cursor: pointer;
+	}
+
+	.toggle:hover {
+		color: var(--color-primary);
+	}
+
+	.toggle svg {
+		inline-size: 1.25rem;
+		block-size: 1.25rem;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 2;
+		stroke-linecap: round;
+		stroke-linejoin: round;
 	}
 
 	.options {
@@ -163,8 +192,15 @@
 		gap: 0.5rem;
 	}
 
-	.options a {
+	.options a,
+	.signup a {
 		color: var(--color-primary);
+	}
+
+	.signup {
+		margin: 0;
+		text-align: center;
+		font-size: clamp(0.875rem, 0.85rem + 0.15vw, 1rem);
 	}
 
 	.submit {
