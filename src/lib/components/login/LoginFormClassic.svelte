@@ -25,6 +25,9 @@
 	}
 </script>
 
+<section class="card" aria-labelledby="{uid}-title">
+<h3 id="{uid}-title" class="title">Entrar</h3>
+
 <form class="login" onsubmit={handleSubmit}>
 	<div class="field">
 		<label for="{uid}-email">Correo electrónico</label>
@@ -78,8 +81,23 @@
 		{#if signedIn}Sesión iniciada (simulado).{/if}
 	</p>
 </form>
+</section>
 
 <style>
+	.card {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+	}
+
+	.title {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: clamp(1.25rem, 1.1rem + 0.75vw, 1.625rem);
+		line-height: 1.2;
+		text-align: center;
+	}
+
 	.login {
 		display: flex;
 		flex-direction: column;

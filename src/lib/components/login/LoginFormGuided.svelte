@@ -128,6 +128,7 @@
 		font-family: var(--font-display);
 		font-size: clamp(1.25rem, 1.1rem + 0.75vw, 1.625rem);
 		line-height: 1.2;
+		text-align: center;
 	}
 
 	.success {
