@@ -4,6 +4,11 @@
 	import SignUpForm from '#lib/components/login/SignUpForm.svelte';
 	import { simulateLogin } from '#lib/utils/simulateLogin.ts';
 
+	import type { PatternProps } from '#lib/data/uiComponents.ts';
+
+	// Accepts the shared pattern props; this pattern keeps its tabs on one route, so it never reports a change.
+	let {}: PatternProps = $props();
+
 	type Mode = 'signUp' | 'signIn';
 
 	// Tabs say who the user is; sign-up comes first and is the default because most visitors are new.

@@ -2,11 +2,18 @@ import type { Component } from 'svelte';
 import LoginFormGuided from '#lib/components/login/LoginFormGuided.svelte';
 import LoginFormClassic from '#lib/components/login/LoginFormClassic.svelte';
 
+export const DEFAULT_ROUTE = '/entrar';
+
+/** Props every pattern may receive; patterns that simulate navigation report the new route. */
+export interface PatternProps {
+	onroutechange?: (route: string) => void;
+}
+
 export interface ComponentPattern {
 	id: string;
 	name: string;
 	description: string;
-	component: Component;
+	component: Component<PatternProps>;
 }
 
 export interface UiComponent {

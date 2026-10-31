@@ -1,8 +1,11 @@
 <script lang="ts">
 	import UrlBar from '#lib/components/UrlBar.svelte';
+	import { DEFAULT_ROUTE } from '#lib/data/uiComponents.ts';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
+	// Simulated route shown in each pattern's URL bar, keyed by pattern id.
+	let routes = $state<Record<string, string>>({});
 	const uiComponent = $derived(data.uiComponent);
 </script>
 
@@ -24,9 +27,9 @@
 			<section class="pattern" aria-labelledby="pattern-{pattern.id}">
 				<h2 id="pattern-{pattern.id}" class="pattern-title">{pattern.name}</h2>
 				<p class="pattern-text">{pattern.description}</p>
+				<UrlBar path={routes[pattern.id] ?? DEFAULT_ROUTE} />
 				<div class="pattern-demo">
-					<UrlBar />
-					<Pattern />
+					<Pattern onroutechange={(route) => (routes[pattern.id] = route)} />
 				</div>
 			</section>
 		{/each}
@@ -91,9 +94,6 @@
 	}
 
 	.pattern-demo {
-		display: flex;
-		flex-direction: column;
-		gap: clamp(1rem, 3vw, 1.5rem);
 		padding: clamp(1.25rem, 3vw, 2rem);
 		border-radius: 1rem;
 		background: var(--color-surface);

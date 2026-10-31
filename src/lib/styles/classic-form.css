@@ -1,0 +1,98 @@
+/* Shared styles for the "classic" (conventional) sign-in and sign-up forms. */
+
+.classic-card {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+.classic-title {
+	margin: 0;
+	font-family: var(--font-display);
+	font-size: clamp(1.25rem, 1.1rem + 0.75vw, 1.625rem);
+	line-height: 1.2;
+	text-align: center;
+}
+
+.classic-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+.classic-field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.375rem;
+}
+
+.classic-field label {
+	font-size: clamp(0.875rem, 0.85rem + 0.15vw, 1rem);
+}
+
+.classic-input {
+	padding: 0.75rem 0.875rem;
+	border: 1px solid var(--color-border);
+	border-radius: 0.25rem;
+	background: var(--color-surface);
+	color: var(--color-text);
+	font: inherit;
+}
+
+.classic-options {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+	font-size: clamp(0.875rem, 0.85rem + 0.15vw, 1rem);
+}
+
+.classic-remember {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.classic-options a,
+.classic-link {
+	color: var(--color-primary);
+}
+
+/* A button that reads as a link: it changes the view instead of navigating. */
+.classic-link {
+	padding: 0;
+	border: 0;
+	background: transparent;
+	font: inherit;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.classic-submit {
+	padding: 0.75rem 1.5rem;
+	border: 0;
+	border-radius: 0.25rem;
+	background: var(--color-primary);
+	color: var(--color-surface);
+	font: inherit;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.classic-submit:disabled {
+	background: var(--color-border);
+	color: var(--color-text-muted);
+	cursor: not-allowed;
+}
+
+.classic-status {
+	margin: 0;
+	color: var(--color-text-muted);
+}
+
+.classic-switch {
+	margin: 0;
+	text-align: center;
+	font-size: clamp(0.875rem, 0.85rem + 0.15vw, 1rem);
+}

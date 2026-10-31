@@ -5,7 +5,9 @@
 		host?: string;
 	}
 
-	let { path = '/entrar', host = 'ejemplo.com' }: Props = $props();
+	import { DEFAULT_ROUTE } from '#lib/data/uiComponents.ts';
+
+	let { path = DEFAULT_ROUTE, host = 'ejemplo.com' }: Props = $props();
 </script>
 
 <p class="url-bar">
