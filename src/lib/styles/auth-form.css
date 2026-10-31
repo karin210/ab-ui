@@ -1,0 +1,110 @@
+/* Styles shared by the authentication form components (fields, guidance, submit). */
+
+.auth-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+.auth-field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.375rem;
+}
+
+.auth-label {
+	font-weight: 600;
+	font-size: clamp(0.875rem, 0.85rem + 0.15vw, 1rem);
+}
+
+.auth-input {
+	padding: 0.75rem 0.875rem;
+	padding-inline-end: var(--controls-space, 0.875rem);
+	border: 1px solid var(--color-border);
+	border-radius: 0.5rem;
+	background: var(--color-surface);
+	color: var(--color-text);
+	font: inherit;
+}
+
+/* The border mark shows only after leaving the field; focus hands it back to the ring. */
+.auth-input[data-mark='invalid']:not(:focus) {
+	border-color: var(--color-error);
+}
+
+.auth-input[data-mark='valid']:not(:focus) {
+	border-color: var(--color-brand-green-strong);
+}
+
+.auth-input.valid:focus-visible {
+	outline-color: var(--color-brand-green-strong);
+}
+
+.auth-example {
+	margin: 0;
+	color: var(--color-ink);
+	font-size: clamp(0.75rem, 0.7375rem + 0.1vw, 0.875rem);
+	font-weight: 400;
+}
+
+.auth-example .met {
+	color: var(--color-brand-green-strong);
+}
+
+.auth-example .missing {
+	color: var(--color-error);
+}
+
+.auth-guidance {
+	margin: 0;
+	color: var(--color-error);
+	font-size: clamp(0.75rem, 0.7375rem + 0.1vw, 0.875rem);
+	font-weight: 400;
+}
+
+.auth-submit {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	min-inline-size: 12rem;
+	padding: 0.75rem 1.5rem;
+	border: 0;
+	border-radius: 0.5rem;
+	background: var(--color-primary);
+	color: var(--color-surface);
+	font: inherit;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.auth-submit:disabled {
+	opacity: 0.75;
+	cursor: progress;
+}
+
+.auth-spinner {
+	inline-size: 1em;
+	block-size: 1em;
+	border: 2px solid currentColor;
+	border-inline-end-color: transparent;
+	border-radius: 50%;
+	animation: auth-spin 0.8s linear infinite;
+}
+
+.auth-error {
+	margin: 0;
+	color: var(--color-error);
+}
+
+@keyframes auth-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.auth-spinner {
+		animation-duration: 3s;
+	}
+}

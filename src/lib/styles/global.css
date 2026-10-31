@@ -6,6 +6,10 @@
 	--color-tertiary: #ff7a3d;
 	--color-text: #111827;
 	--color-text-muted: #4b5563;
+	--color-border: #c7cad6;
+	--color-ink: #111827;
+	--color-error: #b42318;
+	--color-brand-green-strong: #15803d;
 
 	--font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
 	--font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -33,6 +37,15 @@ button,
 a,
 [role='button'] {
 	-webkit-tap-highlight-color: transparent;
+}
+
+/* Text kept for assistive tech only; a zero-size clipped box stays in the accessibility tree. */
+.visually-hidden {
+	display: inline-block;
+	inline-size: 0;
+	block-size: 0;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 :focus-visible {

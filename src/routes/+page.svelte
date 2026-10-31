@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Hero from '#lib/components/Hero.svelte';
+	import ComponentsSection from '#lib/components/ComponentsSection.svelte';
 </script>
 
 <svelte:head>
@@ -14,4 +15,5 @@
 	<Hero
 		title="Prueba diferentes diseños de interfaces y ayudanos a crear mejores interfaces para las personas"
 	/>
+	<ComponentsSection />
 </main>

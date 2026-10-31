@@ -17,9 +17,9 @@
 		box-sizing: border-box;
 		display: grid;
 		place-items: center;
-		min-height: clamp(28rem, 80vh, 48rem);
+		min-height: clamp(20rem, 45vh, 32rem);
 		padding-inline: var(--page-gutter);
-		padding-block: clamp(4rem, 12vh, 8rem);
+		padding-block: clamp(3rem, 8vh, 6rem);
 		background:
 			radial-gradient(circle at 15% 20%, var(--color-secondary), transparent 55%),
 			radial-gradient(circle at 85% 80%, var(--color-secondary), transparent 50%),
