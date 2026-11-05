@@ -10,6 +10,7 @@
 	--color-ink: #111827;
 	--color-error: #b42318;
 	--color-brand-green-strong: #15803d;
+	--color-backdrop: color-mix(in srgb, var(--color-ink) 55%, transparent);
 
 	--font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
 	--font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -51,4 +52,156 @@ a,
 :focus-visible {
 	outline: 3px solid var(--color-primary);
 	outline-offset: 3px;
+}
+
+/* ---------- Modals (shared by every modal of our own design) ---------- */
+
+/* The page behind an open modal doesn't scroll. */
+html:has(dialog[open]) {
+	overflow: hidden;
+}
+
+/* No padding on the dialog itself, so a click whose target is the dialog is always on the backdrop. */
+.modal {
+	inline-size: min(100% - 2 * var(--page-gutter), 32rem);
+	max-block-size: calc(100dvh - 2rem);
+	padding: 0;
+	border: 0;
+	border-radius: 1rem;
+	background: var(--color-surface);
+	color: var(--color-text);
+	box-shadow: 0 1.5rem 3rem color-mix(in srgb, var(--color-ink) 25%, transparent);
+}
+
+.modal::backdrop {
+	background: var(--color-backdrop);
+}
+
+.modal-body {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+	padding: clamp(1.25rem, 4vw, 2rem);
+}
+
+/* Modal headings use the sober body font so important information reads easily. */
+.modal-title {
+	margin: 0;
+	font-family: var(--font-body);
+	font-weight: 700;
+	font-size: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+	line-height: 1.3;
+}
+
+.modal-text {
+	margin: 0;
+	color: var(--color-text-muted);
+}
+
+.modal-field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.375rem;
+}
+
+.modal-label {
+	font-weight: 600;
+	font-size: clamp(0.875rem, 0.85rem + 0.15vw, 1rem);
+}
+
+.modal-input {
+	padding: 0.75rem 0.875rem;
+	border: 1px solid var(--color-border);
+	border-radius: 0.5rem;
+	background: var(--color-surface);
+	color: var(--color-text);
+	font: inherit;
+}
+
+textarea.modal-input {
+	min-block-size: 6rem;
+	resize: vertical;
+}
+
+/* The border mark shows only after leaving the field; focus hands it back to the ring. */
+.modal-input[data-mark='invalid']:not(:focus) {
+	border-color: var(--color-error);
+}
+
+.modal-input[data-mark='valid']:not(:focus) {
+	border-color: var(--color-brand-green-strong);
+}
+
+.modal-input[data-mark='valid']:focus-visible {
+	outline-color: var(--color-brand-green-strong);
+}
+
+.modal-guidance,
+.modal-error {
+	margin: 0;
+	color: var(--color-error);
+}
+
+.modal-guidance {
+	font-size: clamp(0.75rem, 0.7375rem + 0.1vw, 0.875rem);
+}
+
+/* Non-dismissible modals: Cancelar + the primary action, right-aligned at content width. */
+.modal-actions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 0.75rem;
+}
+
+.modal-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0.75rem 1.25rem;
+	border: 1px solid transparent;
+	border-radius: 0.5rem;
+	font: inherit;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.modal-btn:disabled {
+	opacity: 0.75;
+	cursor: progress;
+}
+
+/* Busy labels ("Guardando…") must not change the button width. */
+.modal-btn-primary,
+.modal-btn-danger {
+	min-inline-size: 12rem;
+	color: var(--color-surface);
+}
+
+.modal-btn-primary {
+	background: var(--color-primary);
+}
+
+.modal-btn-primary:hover:not(:disabled) {
+	background: color-mix(in srgb, var(--color-primary) 85%, var(--color-ink));
+}
+
+/* Destructive confirmation (e.g. "Eliminar documento"). */
+.modal-btn-danger {
+	background: var(--color-error);
+}
+
+.modal-btn-danger:hover:not(:disabled) {
+	background: color-mix(in srgb, var(--color-error) 85%, var(--color-ink));
+}
+
+.modal-btn-cancel {
+	border-color: var(--color-primary);
+	background: transparent;
+	color: var(--color-primary);
+}
+
+.modal-btn-cancel:hover:not(:disabled) {
+	background: var(--color-secondary);
 }

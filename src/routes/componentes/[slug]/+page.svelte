@@ -1,6 +1,5 @@
 <script lang="ts">
 	import UrlBar from '#lib/components/UrlBar.svelte';
-	import { DEFAULT_ROUTE } from '#lib/data/uiComponents.ts';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -27,7 +26,7 @@
 			<section class="pattern" aria-labelledby="pattern-{pattern.id}">
 				<h2 id="pattern-{pattern.id}" class="pattern-title">{pattern.name}</h2>
 				<p class="pattern-text">{pattern.description}</p>
-				<UrlBar path={routes[pattern.id] ?? DEFAULT_ROUTE} />
+				<UrlBar path={routes[pattern.id] ?? uiComponent.defaultRoute} />
 				<div class="pattern-demo">
 					<Pattern onroutechange={(route) => (routes[pattern.id] = route)} />
 				</div>

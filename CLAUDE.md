@@ -26,7 +26,8 @@ The site's UI copy is in Spanish.
 ## Patterns
 
 - Patterns are self-contained demos. They don't call a real backend; async actions are simulated (`simulateLogin.ts`).
-- A pattern that simulates navigation (e.g. moving from sign-in to sign-up) reports the new route through the `onroutechange` prop, and the page shows it in a sample URL bar (`UrlBar`). `DEFAULT_ROUTE` is the initial route shown.
+- A pattern that simulates navigation (e.g. moving from sign-in to sign-up) reports the new route through the `onroutechange` prop, and the page shows it in a sample URL bar (`UrlBar`). Each catalogue entry's `defaultRoute` is the initial route shown.
+- Modal patterns use native `<dialog>` with `showModal()` (full-page). Our modals use the shared `.modal-*` classes in `global.css`; the conventional ones use `classic-modal.css`.
 
 ## Planned
 
