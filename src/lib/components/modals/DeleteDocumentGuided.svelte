@@ -1,5 +1,5 @@
 <script lang="ts">
-	import LoadingSpinner from '#lib/components/LoadingSpinner.svelte';
+	import LoadingSpinner from '#lib/components/global/LoadingSpinner.svelte';
 	import DocumentList from '#lib/components/modals/DocumentList.svelte';
 	import { SAMPLE_DOCUMENTS, type DemoDocument } from '#lib/data/modalDemos.ts';
 	import { simulateRequest } from '#lib/utils/simulateRequest.ts';

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import LoadingSpinner from '#lib/components/LoadingSpinner.svelte';
+	import LoadingSpinner from '#lib/components/global/LoadingSpinner.svelte';
 	import ProfileCard from '#lib/components/modals/ProfileCard.svelte';
 	import { SAMPLE_PROFILE, type Profile } from '#lib/data/modalDemos.ts';
 	import { ProfileForm, type ProfileField } from '#lib/utils/ProfileForm.svelte.ts';

@@ -8,7 +8,7 @@
 		<ul class="cards">
 			{#each uiComponents as component (component.slug)}
 				<li>
-					<a class="card" href="/componentes/{component.slug}">
+					<a class="card" href="/showcase/{component.slug}">
 						<h3 class="card-title">{component.name}</h3>
 						<p class="card-text">{component.description}</p>
 						<span class="card-cta">

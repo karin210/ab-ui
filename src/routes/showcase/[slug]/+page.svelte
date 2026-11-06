@@ -1,32 +1,32 @@
 <script lang="ts">
-	import UrlBar from '#lib/components/UrlBar.svelte';
+	import UrlBar from '#lib/components/showcase/UrlBar.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
 	// Simulated route shown in each pattern's URL bar, keyed by pattern id.
 	let routes = $state<Record<string, string>>({});
-	const uiComponent = $derived(data.uiComponent);
+	const slugComponent = $derived(data.uiComponent);
 </script>
 
 <svelte:head>
-	<title>{uiComponent.name} | ABUI</title>
-	<meta name="description" content={uiComponent.description} />
+	<title>{slugComponent.name} | ABUI</title>
+	<meta name="description" content={slugComponent.description} />
 </svelte:head>
 
 <main>
-	<header class="intro">
-		<a class="back" href="/">← Volver al inicio</a>
-		<h1 class="title">{uiComponent.name}</h1>
-		<p class="lede">{uiComponent.description}</p>
+	<header class="showcase-header">
+		<a class="home-link" href="/">← Volver al inicio</a>
+		<h1 class="showcase-name">{slugComponent.name}</h1>
+		<p class="showcase-description">{slugComponent.description}</p>
 	</header>
 
-	<div class="patterns">
-		{#each uiComponent.patterns as pattern (pattern.id)}
+	<div class="pattern-list">
+		{#each slugComponent.patterns as pattern (pattern.id)}
 			{@const Pattern = pattern.component}
 			<section class="pattern" aria-labelledby="pattern-{pattern.id}">
 				<h2 id="pattern-{pattern.id}" class="pattern-title">{pattern.name}</h2>
-				<p class="pattern-text">{pattern.description}</p>
-				<UrlBar path={routes[pattern.id] ?? uiComponent.defaultRoute} />
+				<p class="pattern-description">{pattern.description}</p>
+				<UrlBar path={routes[pattern.id] ?? slugComponent.defaultRoute} />
 				<div class="pattern-demo">
 					<Pattern onroutechange={(route) => (routes[pattern.id] = route)} />
 				</div>
@@ -46,19 +46,19 @@
 		padding-block: clamp(2rem, 6vh, 4rem);
 	}
 
-	.intro {
+	.showcase-header {
 		display: flex;
 		flex-direction: column;
 		gap: 0.75rem;
 	}
 
-	.back {
+	.home-link {
 		align-self: flex-start;
 		color: var(--color-primary);
 		font-weight: 600;
 	}
 
-	.title {
+	.showcase-name {
 		margin: 0;
 		font-family: var(--font-display);
 		font-weight: 700;
@@ -67,13 +67,13 @@
 		text-wrap: balance;
 	}
 
-	.lede,
-	.pattern-text {
+	.showcase-description,
+	.pattern-description {
 		margin: 0;
 		color: var(--color-text-muted);
 	}
 
-	.patterns {
+	.pattern-list {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
 		gap: clamp(1.5rem, 4vw, 2.5rem);

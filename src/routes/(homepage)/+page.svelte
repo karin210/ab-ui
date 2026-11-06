@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Hero from '#lib/components/Hero.svelte';
-	import ComponentsSection from '#lib/components/ComponentsSection.svelte';
+	import Hero from '#lib/components/homepage/Hero.svelte';
+	import ComponentsSection from '#lib/components/homepage/ComponentsSection.svelte';
 </script>
 
 <svelte:head>
