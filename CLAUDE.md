@@ -21,13 +21,14 @@ The site's UI copy is in Spanish.
 - `src/lib/components/`: shared UI (`Hero`, `ComponentsSection`, `UrlBar`) and the pattern implementations grouped by component (e.g. `login/`).
 - `src/lib/validation/`: shared validation rules (e.g. `auth.ts` for email and password rules).
 - `src/lib/utils/`: helpers and form state classes (e.g. `AuthForm.svelte.ts`, `generatePassword.ts`).
-- `src/lib/styles/`: global and per-pattern stylesheets.
+- `src/styles/app.css`: global styles (`:root` tokens, resets, typography, shared `.modal-*` classes), imported once in `src/routes/+layout.svelte` via `#styles/app.css`.
+- `src/lib/styles/`: per-pattern stylesheets, imported by the pattern components that use them.
 
 ## Patterns
 
 - Patterns are self-contained demos. They don't call a real backend; async actions are simulated (`simulateLogin.ts`).
 - A pattern that simulates navigation (e.g. moving from sign-in to sign-up) reports the new route through the `onroutechange` prop, and the page shows it in a sample URL bar (`UrlBar`). Each catalogue entry's `defaultRoute` is the initial route shown.
-- Modal patterns use native `<dialog>` with `showModal()` (full-page). Our modals use the shared `.modal-*` classes in `global.css`; the conventional ones use `classic-modal.css`.
+- Modal patterns use native `<dialog>` with `showModal()` (full-page). Our modals use the shared `.modal-*` classes in `src/styles/app.css`; the conventional ones use `classic-modal.css`.
 
 ## Planned
 

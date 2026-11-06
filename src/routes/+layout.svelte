@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '#lib/styles/global.css';
+	import '#styles/app.css';
 	import favicon from '#lib/assets/favicon.svg';
 	import type { LayoutProps } from './$types';
 
