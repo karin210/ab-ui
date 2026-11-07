@@ -5,6 +5,9 @@ import EditProfileGuided from '#lib/components/modals/EditProfileGuided.svelte';
 import EditProfileClassic from '#lib/components/modals/EditProfileClassic.svelte';
 import DeleteDocumentGuided from '#lib/components/modals/DeleteDocumentGuided.svelte';
 import DeleteDocumentClassic from '#lib/components/modals/DeleteDocumentClassic.svelte';
+import MenuTopLeft from '#lib/components/hamburger-menu/MenuTopLeft.svelte';
+import MenuTopRight from '#lib/components/hamburger-menu/MenuTopRight.svelte';
+import MenuHybrid from '#lib/components/hamburger-menu/MenuHybrid.svelte';
 
 export const DEFAULT_ROUTE = '/entrar';
 
@@ -95,6 +98,36 @@ export const uiComponents: UiComponent[] = [
 				description:
 					'Convención habitual: «¿Estás seguro?» con Aceptar y Cancelar. También se cierra con la X, con un clic fuera o con Escape.',
 				component: DeleteDocumentClassic
+			}
+		]
+	},
+	{
+		slug: 'posicion-del-menu-hamburguesa',
+		name: 'Posición del menú hamburguesa',
+		description:
+			'Cambia de dispositivo con las pestañas y abre el menú: compara dónde encuentras y pulsas antes el botón.',
+		defaultRoute: '/',
+		patterns: [
+			{
+				id: 'a',
+				name: 'Patrón A',
+				description:
+					'Arriba a la izquierda en todos los dispositivos: según el patrón de lectura en F, es donde la vista lo busca primero.',
+				component: MenuTopLeft
+			},
+			{
+				id: 'b',
+				name: 'Patrón B',
+				description:
+					'Arriba a la derecha en todos los dispositivos: pensado primero para el móvil, queda al alcance del pulgar y la interfaz es igual en cualquier pantalla.',
+				component: MenuTopRight
+			},
+			{
+				id: 'c',
+				name: 'Patrón C',
+				description:
+					'Híbrido: arriba a la derecha en el teléfono, al alcance del pulgar, y arriba a la izquierda en tableta y escritorio, donde la vista lo busca primero.',
+				component: MenuHybrid
 			}
 		]
 	}
