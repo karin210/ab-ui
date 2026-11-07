@@ -17,6 +17,9 @@
 	let screenWidth = $state(0);
 	let screenHeight = $state(0);
 
+	// Width / height of the tallest device: the stage reserves that much height.
+	const tallestRatio = Math.min(...deviceKinds.map((kind) => devices[kind].width / devices[kind].height));
+
 	const device = $derived(devices[selected]);
 	// The content is laid out at the real device width, then scaled down to the frame's screen.
 	const scale = $derived(screenWidth / device.viewportWidth);
@@ -33,12 +36,8 @@
 		{/each}
 	</fieldset>
 
-	<figure class="device-stage">
-		<div
-			class="device"
-			style:aspect-ratio="{device.width} / {device.height}"
-			style:--ratio={device.width / device.height}
-		>
+	<figure class="device-stage" style:--tallest-ratio={tallestRatio}>
+		<div class="device" style:aspect-ratio="{device.width} / {device.height}">
 			<div class="device-screen" style:padding={screenInsets(device)}>
 				<div class="screen-fit" bind:clientWidth={screenWidth} bind:clientHeight={screenHeight}>
 					{#if scale > 0}
@@ -59,7 +58,9 @@
 </div>
 
 <style>
+	/* A size container, so the device is sized from the space it actually gets, not from the window. */
 	.device-preview {
+		container: device-preview / inline-size;
 		display: grid;
 		gap: 0.75rem;
 	}
@@ -101,13 +102,12 @@
 		outline-offset: 2px;
 	}
 
-	/* The stage keeps one size so switching devices never moves the content below. */
+	/* The stage is as tall as the tallest device so switching devices never moves the content below. */
 	.device-stage {
+		--device-width: min(92cqi, 750px);
 		display: grid;
 		place-items: center;
-		aspect-ratio: 4 / 3;
-		/* Size containment: the device can't grow the stage, it is fitted inside it instead. */
-		container-type: size;
+		min-height: calc(var(--device-width) / var(--tallest-ratio));
 		margin: 0;
 		border-radius: 1rem;
 		background: var(--color-secondary);
@@ -115,12 +115,12 @@
 
 	/*
 	 * Screen and frame share one grid cell: the frame sits on top of the screen.
-	 * The width is the largest that fits the stage at the device's aspect ratio (92% of it).
+	 * Every device is 92% of the preview's width on small screens and at most 750px on larger ones.
 	 */
 	.device {
 		display: grid;
 		grid-template: minmax(0, 1fr) / minmax(0, 1fr);
-		width: min(92cqw, 92cqh * var(--ratio));
+		width: var(--device-width);
 		/* The frame's pixel size must not feed back into the box: width and aspect-ratio decide it. */
 		contain: size;
 		min-height: 0;

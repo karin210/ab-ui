@@ -17,7 +17,7 @@ The site's UI copy is in Spanish.
 - `src/routes/+page.svelte`: home page (hero and the list of components to compare).
 - `src/routes/showcase/[slug]/`: one page per UI component, rendering its patterns. Unknown slugs throw a `404`.
 - `src/routes/+error.svelte`: custom branded error / 404 page.
-- `src/lib/data/uiComponents.ts`: the catalogue. Each `UiComponent` has a `slug`, `name`, `description` and a list of `ComponentPattern`s (`id`, `name`, `description`, Svelte `component`). Add a new component to compare by adding an entry here.
+- `src/lib/data/uiComponents.ts`: the catalogue. Each `UiComponent` has a `slug`, `name`, `description`, an optional `patternLayout` (`columns` by default, or `stacked` for one pattern per row, used by wide demos like device previews) and a list of `ComponentPattern`s (`id`, `name`, `description`, Svelte `component`). Add a new component to compare by adding an entry here.
 - `src/lib/components/`: no loose files. `homepage/` (`Hero`, `ComponentsSection`) holds components used only on the home page, `showcase/` (`UrlBar`) those used only on the component pages, and `global/` (`LoadingSpinner`, `DevicePreview`) those imported by several pages or components. The pattern implementations are grouped by component (e.g. `login/`, `modals/`, `hamburger-menu/`).
 - `src/lib/validation/`: shared validation rules (e.g. `auth.ts` for email and password rules).
 - `src/lib/utils/`: helpers and form state classes (e.g. `AuthForm.svelte.ts`, `generatePassword.ts`).

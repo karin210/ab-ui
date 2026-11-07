@@ -29,6 +29,11 @@ export interface UiComponent {
 	description: string;
 	/** Route shown in each pattern's sample URL bar until the pattern reports another one. */
 	defaultRoute: string;
+	/**
+	 * How the patterns are laid out on the page: side by side in columns (default),
+	 * or one per row for wide demos such as device previews.
+	 */
+	patternLayout?: 'columns' | 'stacked';
 	patterns: ComponentPattern[];
 }
 
@@ -107,6 +112,7 @@ export const uiComponents: UiComponent[] = [
 		description:
 			'Cambia de dispositivo con las pestañas y abre el menú: compara dónde encuentras y pulsas antes el botón.',
 		defaultRoute: '/',
+		patternLayout: 'stacked',
 		patterns: [
 			{
 				id: 'a',

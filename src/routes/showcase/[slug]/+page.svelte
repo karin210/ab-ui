@@ -20,7 +20,7 @@
 		<p class="showcase-description">{slugComponent.description}</p>
 	</header>
 
-	<div class="pattern-list">
+	<div class="pattern-list" data-layout={slugComponent.patternLayout ?? 'columns'}>
 		{#each slugComponent.patterns as pattern (pattern.id)}
 			{@const Pattern = pattern.component}
 			<section class="pattern" aria-labelledby="pattern-{pattern.id}">
@@ -78,6 +78,11 @@
 		grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
 		gap: clamp(1.5rem, 4vw, 2.5rem);
 		align-items: start;
+	}
+
+	/* One pattern per row, so wide demos (device previews) get the full content width. */
+	.pattern-list[data-layout='stacked'] {
+		grid-template-columns: minmax(0, 1fr);
 	}
 
 	.pattern {
