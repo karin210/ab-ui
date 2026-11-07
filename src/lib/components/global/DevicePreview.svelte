@@ -17,9 +17,6 @@
 	let screenWidth = $state(0);
 	let screenHeight = $state(0);
 
-	// Width / height of the tallest device: the stage reserves that much height.
-	const tallestRatio = Math.min(...deviceKinds.map((kind) => devices[kind].width / devices[kind].height));
-
 	const device = $derived(devices[selected]);
 	// The content is laid out at the real device width, then scaled down to the frame's screen.
 	const scale = $derived(screenWidth / device.viewportWidth);
@@ -36,7 +33,7 @@
 		{/each}
 	</fieldset>
 
-	<figure class="device-stage" style:--tallest-ratio={tallestRatio}>
+	<figure class="device-stage">
 		<div class="device" style:aspect-ratio="{device.width} / {device.height}">
 			<div class="device-screen" style:padding={screenInsets(device)}>
 				<div class="screen-fit" bind:clientWidth={screenWidth} bind:clientHeight={screenHeight}>
@@ -102,25 +99,25 @@
 		outline-offset: 2px;
 	}
 
-	/* The stage is as tall as the tallest device so switching devices never moves the content below. */
+	/* The stage wraps the selected device with an even padding, so its height follows the device. */
 	.device-stage {
-		--device-width: min(92cqi, 750px);
 		display: grid;
+		grid-template-columns: minmax(0, 1fr);
 		place-items: center;
-		min-height: calc(var(--device-width) / var(--tallest-ratio));
 		margin: 0;
+		padding: clamp(0.75rem, 4cqi, 2rem);
 		border-radius: 1rem;
 		background: var(--color-secondary);
 	}
 
 	/*
 	 * Screen and frame share one grid cell: the frame sits on top of the screen.
-	 * Every device is 92% of the preview's width on small screens and at most 750px on larger ones.
+	 * Every device fills the stage's content width on small screens and is at most 900px on larger ones.
 	 */
 	.device {
 		display: grid;
 		grid-template: minmax(0, 1fr) / minmax(0, 1fr);
-		width: var(--device-width);
+		width: min(100%, 900px);
 		/* The frame's pixel size must not feed back into the box: width and aspect-ratio decide it. */
 		contain: size;
 		min-height: 0;
